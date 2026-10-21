@@ -1,0 +1,60 @@
+* { box-sizing: border-box; }
+:root { --pink: #ff6b9b; --deep: #21113f; --cream: #ffe8dc; }
+body {
+  margin: 0; min-height: 100vh; font-family: "Trebuchet MS", Arial, sans-serif;
+  color: white; background: #160d2b; display: grid; place-items: center; overflow: hidden;
+}
+.scene {
+  width: min(100vw, 1000px); height: min(100vh, 760px); min-height: 620px;
+  position: relative; overflow: hidden; isolation: isolate;
+  background: radial-gradient(ellipse at 50% 75%, #6e2e68 0%, #39205c 36%, #191333 75%);
+  border-radius: 22px; box-shadow: 0 25px 80px #080512aa;
+}
+.scene::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .25;
+  background-image: radial-gradient(#fff 1px, transparent 1.5px);
+  background-size: 53px 53px; animation: starDrift 22s linear infinite;
+}
+.moon { position:absolute; top: 80px; right: 13%; width: 74px; height: 74px; border-radius: 50%;
+  background: #fff0cb; box-shadow: 0 0 38px #ffe9bc88; }
+.message { position: absolute; top: 45px; width: 100%; text-align: center; padding: 0 18px; z-index: 3; }
+.eyebrow { letter-spacing: .35em; font-size: .7rem; color: #ffc3d7; font-weight: bold; }
+h1 { margin: 10px 0; font-size: clamp(2rem, 5vw, 3.3rem); text-shadow: 0 4px 25px #ff6b9b55; }
+h1 span, .footer span { color: var(--pink); }
+.subtitle { color: #e8d9f4; font-size: clamp(.85rem, 2vw, 1.05rem); }
+.couple { position: absolute; width: 330px; height: 330px; bottom: 112px; left: 50%; transform: translateX(-50%); }
+.person { position: absolute; bottom: 0; width: 125px; height: 245px; animation: sway 2.8s ease-in-out infinite; transform-origin: bottom center; }
+.person-left { left: 38px; --skin: #b96d55; --cloth: #ff6b9b; --hair: #2b1624; }
+.person-right { right: 38px; --skin: #f0b38f; --cloth: #78d7d0; --hair: #51302a; animation-delay: -.8s; }
+.head { position: absolute; width: 82px; height: 91px; left: 21px; top: 20px; border-radius: 43% 43% 46% 46%; background: var(--skin); z-index: 2; }
+.hair { position: absolute; width: 88px; height: 55px; top: 10px; left: 16px; border-radius: 50% 50% 25% 25%; background: var(--hair); z-index: 3; }
+.person-left .hair { height: 73px; border-radius: 48% 45% 20% 35%; }
+.person-right .hair { height: 48px; }
+.eye { position:absolute; top: 43px; left: 53px; width: 5px; height: 7px; background:#3d1c2a; border-radius:50%; }
+.cheek { position:absolute; top: 56px; left: 57px; width: 13px; height: 7px; background:#f77f92; border-radius:50%; opacity:.8; }
+.body { position:absolute; width: 112px; height: 116px; left: 7px; top: 105px; border-radius: 34px 34px 16px 16px; background:var(--cloth); box-shadow: inset -12px -8px #00000010; }
+.arm { position:absolute; width: 27px; height: 94px; top: 112px; border-radius: 20px; background:var(--skin); z-index: 4; }
+.arm-inner { right: -3px; transform: rotate(-32deg); transform-origin: top center; }
+.person-right .arm-inner { left: -3px; transform: rotate(32deg); }
+.leg { position:absolute; top: 205px; width: 31px; height: 42px; border-radius: 0 0 12px 12px; background:#29213e; }
+.leg-left { left: 28px; }.leg-right { right: 28px; }
+.person-right .leg { background:#29213e; }
+.kiss-heart { position:absolute; z-index:5; left:50%; top:68px; color:#ff8eb5; font-size:34px; animation: heartbeat 1s ease-in-out infinite; text-shadow:0 0 22px #ff8eb5; }
+.ground { position:absolute; bottom:-70px; left:-10%; width:120%; height:180px; background:linear-gradient(#3c2455,#211637); border-radius:50% 50% 0 0; box-shadow:0 -15px 55px #ff8ac522; }
+#loveButton { position:absolute; bottom:53px; left:50%; transform:translateX(-50%); z-index:6; border:1px solid #ffffff55;
+  padding:14px 24px; border-radius:999px; background:#ff6b9b; color:#32132c; font-weight:700; font-size:.95rem;
+  cursor:pointer; box-shadow:0 8px 28px #ff6b9b55; transition:transform .2s, background .2s; white-space:nowrap; }
+#loveButton:hover { transform:translateX(-50%) scale(1.06); background:#ff9fbd; }
+.footer { position:absolute; bottom:12px; width:100%; text-align:center; color:#c9b7dd; font-size:.75rem; z-index:6; }
+.floating-heart { position:absolute; z-index:8; bottom:105px; left:var(--x); color:#ff9fbd; font-size:var(--size); pointer-events:none; animation: floatUp var(--duration) ease-out forwards; }
+@keyframes sway { 0%,100% { transform:rotate(-2deg) translateY(0); } 50% { transform:rotate(2deg) translateY(-7px); } }
+@keyframes heartbeat { 0%,100% { transform:translateX(-50%) scale(1); } 50% { transform:translateX(-50%) scale(1.22); } }
+@keyframes floatUp { to { transform:translateY(-480px) rotate(25deg); opacity:0; } }
+@keyframes starDrift { to { background-position: 106px 159px; } }
+@media (max-width: 560px) {
+  .scene { min-height: 600px; height: 100dvh; border-radius:0; }
+  .moon { width:55px;height:55px;top:110px;right:9%; }
+  .message { top:45px; }
+  .couple { transform:translateX(-50%) scale(.88); transform-origin:bottom center; bottom:115px; }
+  #loveButton { bottom:53px; font-size:.85rem; padding:12px 18px; }
+}
